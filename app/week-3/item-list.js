@@ -77,14 +77,12 @@ export default function ItemList(){
         quantity: 4,
         category: "household",
       };
-      
-console.log(item1);
 
 
 
     return (
         <div>
-            <ul>
+            <ul className="w-2/5">
             <Item name={item1.name}  quantity ={item1.quantity} category ={item1.category}/>
             <Item name={item2.name}  quantity ={item2.quantity} category ={item2.category}/>
             <Item name={item3.name}  quantity ={item3.quantity} category ={item3.category}/>
