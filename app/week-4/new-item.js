@@ -20,9 +20,11 @@ export default function NewItem (){
 
     let [quantity, setQuantity] = useState(0)
     return (<div> 
-        <p>Count: {quantity}</p>
-        <button className="flex-1 w-24" onClick={increment}>increment </button>
-        <button className="flex-2" onClick={decrement}>decrement</button>
+        <p className="  text-center w-100 h-10 font-bold" >Count: {quantity}</p>
+        <div className=" flex w-full justify-center align-center">
+        <button className=" bg-green-500 rounded-xl mx-8 w-24 " onClick={increment}>increment </button>
+        <button className=" bg-red-500 rounded-xl  mx-8 w-24" onClick={decrement}>decrement</button>
+        </div>
     </div>
     )
 };
