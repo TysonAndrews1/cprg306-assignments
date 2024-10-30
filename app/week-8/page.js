@@ -24,13 +24,14 @@ function generateRandomString(length) {
 
 export default function Page() {
     const [items,setItems] = useState([...jsonItems])
+    const[name, setName] = useState("")
+    const [quantity, setQuantity] = useState(0);
+    const [category, setCategory] = useState("produce")
+    const [ingredient, setIngredient] =useState("null")
+    
     let listOfItems = [...items]
-   const[name, setName] = useState("")
-   const [quantity, setQuantity] = useState(0);
-   const [category, setCategory] = useState("produce")
-   const [ingredient, setIngredient] =useState("null")
 
-   const handleSubmit = (event,name,quantity,category) =>{
+    const handleSubmit = (event,name,quantity,category) =>{
     event.preventDefault()
     const newItem = {
         id: `${generateRandomString(15)}`,

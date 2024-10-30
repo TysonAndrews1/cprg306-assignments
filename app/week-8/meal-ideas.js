@@ -73,10 +73,10 @@ export default function MealIdeas({ ingredient }) {
     }, [ingredient]); // Fetch meals when the ingredient changes
 
     return (
-            <div className="p-4">
-                {/* Meal List */}
-                <div className="mb-6">
-                    <h3 className="text-xl font-bold mb-2 text-gray-800">Meals</h3>
+        <div className="p-4">
+            {/* Meal List */}
+            <div className="mb-6">
+                <h3 className="text-xl font-bold mb-2 text-gray-800">Meals</h3>
                     {meals.length > 0 ? (
                         <ul className="space-y-2">
                             {meals.map(m => (

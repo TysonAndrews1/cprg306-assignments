@@ -107,6 +107,7 @@ return (
                               name={item.name} 
                               quantity={item.quantity} 
                               category={item.category} 
+                              click={handleIngredientSelect} 
                           />
                       </div>
                   )
