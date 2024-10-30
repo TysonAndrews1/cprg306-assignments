@@ -13,6 +13,8 @@ export default function main(){
     <Link href="http://localhost:3000/week-5">Week-5</Link>
     <Link href="http://localhost:3000/week-6">Week-6</Link>
     <Link href="http://localhost:3000/week-7">Week-7</Link>
+    <Link href="http://localhost:3000/week-8">Week-8</Link>
+
     </div>
     )
 }
