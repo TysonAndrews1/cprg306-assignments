@@ -48,7 +48,6 @@ switch (sortBy) {
       });
       break;
       case"grouped Category":
-      console.log(categoryList);
       sorted.sort(function(a, b){
         let x = a.category.toLowerCase();
         let y = b.category.toLowerCase();
@@ -63,31 +62,57 @@ switch (sortBy) {
 }
 
 return (
-  
-  <div>
-    <p>Sorting By {sortBy}</p>
-        
-    <button onClick={() => setSortBy("name")}>Name </button>
-    <button onClick={() => setSortBy("category")}>Category </button>
-    <button onClick={() => setSortBy("quantity")}>Quantity </button>
-    <button onClick={() => setSortBy("grouped Category")}>Grouped Category </button>    
+  <div className="p-4">
+      <p className="text-gray-800 font-semibold mb-4">Sorting By: {sortBy}</p>
+      
+      <div className="flex space-x-2 mb-4">
+          {["name", "category", "quantity", "grouped Category"].map((sortOption) => (
+              <button 
+                  key={sortOption}
+                  onClick={() => setSortBy(sortOption)} 
+                  className={`rounded px-4 py-2 transition duration-200 
+                      ${sortBy === sortOption ? 'bg-blue-800 text-white' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+              >
+                  {sortOption.charAt(0).toUpperCase() + sortOption.slice(1)}
+              </button>
+          ))}
+      </div>
 
-    {sortBy !== "grouped Category" ? (
-      sorted.map((item) => (
-        <Item key={item.id} name={item.name} quantity={item.quantity} category={item.category} click={handleIngredientSelect} />
-      ))
-    ) : (
-      sorted.map((item, index) => (
-        categoryList[index] === false ? (
-          <Item key={item.id} name={item.name} quantity={item.quantity} category={item.category} click={onClick} />
-        ) : (
-          <div key={item.id}>
-            <label className="capitalize" >{categoryList[index]}</label>
-            <Item key={item.id} name={item.name} quantity={item.quantity} category={item.category} />
-          </div>
-        )
-      ))
-    )}
-
+      <div className="mt-4">
+          {sortBy !== "grouped Category" ? (
+              sorted.map((item) => (
+                  <Item 
+                      key={item.id} 
+                      name={item.name} 
+                      quantity={item.quantity} 
+                      category={item.category} 
+                      click={handleIngredientSelect} 
+                  />
+              ))
+          ) : (
+              sorted.map((item, index) => (
+                  categoryList[index] === false ? (
+                      <Item 
+                          key={item.id} 
+                          name={item.name} 
+                          quantity={item.quantity} 
+                          category={item.category} 
+                          click={handleIngredientSelect} 
+                      />
+                  ) : (
+                      <div key={item.id} className="mb-2">
+                          <label className="capitalize block font-semibold">{categoryList[index]}</label>
+                          <Item 
+                              key={item.id} 
+                              name={item.name} 
+                              quantity={item.quantity} 
+                              category={item.category} 
+                          />
+                      </div>
+                  )
+              ))
+          )}
+      </div>
   </div>
-)}
+);
+}

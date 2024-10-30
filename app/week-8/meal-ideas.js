@@ -6,7 +6,6 @@ async function getMeals(ingredient) {
     try {
         const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
         const data = await response.json();
-        console.log(data); // Log the data received from the API
         return data.meals || []; // Return meals or an empty array if none
     } catch (error) {
         console.error("Error:", error);
@@ -15,12 +14,10 @@ async function getMeals(ingredient) {
 }
 
 async function getIngredients(mealId) {
-    console.log(mealId);
     const ingredients = [];
     try {
         const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`);
         const data = await response.json();
-        console.log(data); // Log the data received from the API
 
         if (!data.meals || data.meals.length === 0) return []; // Return empty array if no meals found
 
@@ -59,7 +56,6 @@ export default function MealIdeas({ ingredient }) {
         const fetchIngredient = async () => {
             if (meal) {
                 const ingredients = await getIngredients(meal.idMeal);
-                console.log("Fetched ingredients:", ingredients); // Log fetched ingredients
                 setIngredients(ingredients); // Update state with fetched ingredients
             }
         };
@@ -69,34 +65,50 @@ export default function MealIdeas({ ingredient }) {
     useEffect(() => {
         const fetchMeals = async () => {
             const standard = becomeStandard(ingredient);
-            console.log(standard);
             const mealsData = await getMeals(standard);
-            console.log("Fetched meals:", mealsData); // Log fetched meals
             setMeals(mealsData); // Update state with fetched meals
         };
         fetchMeals();
+        setIngredients("");
     }, [ingredient]); // Fetch meals when the ingredient changes
 
     return (
-        <div>
-            {meals.length > 0 ? (
-                <ul>
-                    {meals.map(m => (
-                        <li onClick={() => setMeal(m)} key={m.idMeal}>{m.strMeal}</li> // Use arrow function for onClick
-                    ))}
-                </ul>
-            ) : (
-                <p>No meals found</p>
-            )}
-            {ingredients.length > 0 ? (
-                <ul>
-                    {ingredients.map((i, index) => (
-                        <li key={index}>{i}</li> // Use index as key here
-                    ))}
-                </ul>
-            ) : (
-                <p>No ingredients found</p>
-            )}
-        </div>
-    );
+            <div className="p-4">
+                {/* Meal List */}
+                <div className="mb-6">
+                    <h3 className="text-xl font-bold mb-2 text-gray-800">Meals</h3>
+                    {meals.length > 0 ? (
+                        <ul className="space-y-2">
+                            {meals.map(m => (
+                                <li
+                                    onClick={() => setMeal(m)}
+                                    key={m.idMeal}
+                                     className="flex items-center justify-between bg-slate-700 text-white rounded-lg p-4 my-2 hover:bg-slate-800 transition duration-200"
+                                >
+                                    {m.strMeal}
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p className="text-gray-600">No meals found</p>
+                    )}
+                </div>
+        
+                {/* Ingredient List */}
+                <div>
+                    <h3 className="text-xl font-bold mb-2 text-gray-800">Ingredients</h3>
+                    {ingredients.length > 0 ? (
+                        <ul className="space-y-2">
+                            {ingredients.map((i, index) => (
+                                <li key={index}  className="flex items-center justify-between bg-slate-700 text-white rounded-lg p-4 my-2 hover:bg-slate-800 transition duration-200">
+                                    {i}
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p className="text-gray-600">No ingredients found</p>
+                    )}
+                </div>
+            </div>
+        );
 }

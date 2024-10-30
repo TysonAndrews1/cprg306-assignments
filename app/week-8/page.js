@@ -38,58 +38,76 @@ export default function Page() {
         quantity:`${quantity}`,
         category:`${category}`
     }
-    console.log(newItem);
     listOfItems.push(newItem)
     setItems(listOfItems)
-    console.log(listOfItems);
-    
 }
     const handleMealSuggest = (inputIngredient) =>{
-        console.log(inputIngredient);
         setIngredient(inputIngredient)
-        
     }
 
    const handleQuantityChange = (newQuantity) => {
     setQuantity(newQuantity); // Update the quantity state
   };
-    return(
-        
-    <main className="flex items-center justify-center min-h-screen ">
-        <ItemList items = {listOfItems} handleIngredientSelect = {handleMealSuggest}/>
-        <form
-        className="p-6 rounded-lg shadow-md w-96 space-y-4 bg-slate-500"
-        onSubmit={(e) => handleSubmit(e, name, quantity, category)} // Pass quantity here
-        >
-        <div>
-    <p>Name:</p>
-    <input className=" text-slate-500" type="text" value={name} onChange={(e) => setName(e.target.value)} required/>
-    </div>
-    <NewItem onQuantityChange={handleQuantityChange}/>
-    <div>
-        <p>Category:</p>
-    <select className="text-slate-500"  value={category} onChange={(e) => setCategory(e.target.value)}>
-        <option value={'produce'}>Produce</option>
-        <option value={'dairy'}>Dairy</option>
-        <option value={'bakery'}>Bakery</option>
-        <option value={'meat'}>Meat</option>
-        <option value={'frozen foods'}>Frozen Foods</option>
-        <option value={'canned goods'}>Canned Goods</option>
-        <option value={'dry goods'}>Dry Goods</option>
-        <option value={'beverages'}>Beverages</option>
-        <option value={'snacks'}>Snacks</option>
-        <option value={'household'}>Household</option>
-        <option value={'other'}>Other</option>
-    </select>
-    </div>
-<div>
-    <button type="submit" >submit</button>
-    </div>
-    </form>
-    <div className="flex-2 m-3 bg-slate-700 p-5 rounded-2xl" >
-    <p>Name: {name} Quantity: {quantity} Category: {category}</p>
-    </div>
-    <MealIdeas ingredient={ingredient}></MealIdeas>
+  return (
+    <main className="flex flex-col md:flex-row items-start justify-center min-h-screen p-4">
+        {/* New Item Column */}
+        <div className="flex-1 mb-4 md:mb-0 md:mr-4 bg-slate-600 rounded-lg p-4">
+            <h2 className="text-lg font-bold mb-2">New Item</h2>
+            <form
+                className="p-6 rounded-lg shadow-md bg-slate-500"
+                onSubmit={(e) => handleSubmit(e, name, quantity, category)}
+            >
+                <div>
+                    <p className="text-white">Name:</p>
+                    <input
+                        className="text-slate-500 p-2 rounded"
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                    />
+                </div>
+                <NewItem onQuantityChange={handleQuantityChange} />
+                <div>
+                    <p className="text-white">Category:</p>
+                    <select
+                        className="text-slate-500 p-2 rounded"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                    >
+                        <option value="produce">Produce</option>
+                        <option value="dairy">Dairy</option>
+                        <option value="bakery">Bakery</option>
+                        <option value="meat">Meat</option>
+                        <option value="frozen foods">Frozen Foods</option>
+                        <option value="canned goods">Canned Goods</option>
+                        <option value="dry goods">Dry Goods</option>
+                        <option value="beverages">Beverages</option>
+                        <option value="snacks">Snacks</option>
+                        <option value="household">Household</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit" className="bg-blue-600 text-white rounded px-4 py-2">Submit</button>
+                </div>
+            </form>
+            <div className="flex-2 m-3 bg-slate-700 p-5 rounded-2xl">
+                <p className="text-white">Name: {name} Quantity: {quantity} Category: {category}</p>
+            </div>
+        </div>
+
+        {/* Item List Column */}
+        <div className="flex-1 mb-4 md:mb-0 md:mr-4 bg-slate-600 rounded-lg p-4">
+            <h2 className="text-lg font-bold mb-2">Item List</h2>
+            <ItemList items={listOfItems} handleIngredientSelect={handleMealSuggest} />
+        </div>
+
+        {/* Meal Items Column */}
+        <div className="flex-1 bg-slate-600 rounded-lg p-4">
+            <h2 className="text-lg font-bold mb-2">Meal Items</h2>
+            <MealIdeas ingredient={ingredient} />
+        </div>
     </main>
-    )
+);
 }
