@@ -1,17 +1,20 @@
 
 "use client"
-import { useState } from "react"
-import NewItem from "./new-item"
+import { useState } from "react";
+import NewItem from "./new-item";
 import ItemList from "./item-list";
 import React from "react";
-import jsonItems from "./items.json"
-import MealIdeas from "./meal-ideas"
+import jsonItems from "./items.json";
+import MealIdeas from "./meal-ideas";
+import { useUserAuth } from '../hooks/useUserAuth'; // Import your custom hook for user authentication
+import { useNavigate } from 'react-router-dom';
 const arr = [1,3,4,6,2,5]
 
 
 function generateRandomString(length) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
+    
 
     for (let i = 0; i < length; i++) {
         const randomIndex = Math.floor(Math.random() * characters.length);
@@ -28,6 +31,16 @@ export default function Page() {
     const [quantity, setQuantity] = useState(0);
     const [category, setCategory] = useState("produce")
     const [ingredient, setIngredient] =useState("null")
+    const { user, loading } = useUserAuth(); // Get user and loading state from the hook
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        if (!loading && user === null) {
+          // Optionally, you can redirect the user to the landing page if not logged in
+          navigate('/app/week-9/page.js');
+        }
+      }, [user, loading, navigate]);
     
     let listOfItems = [...items]
 
