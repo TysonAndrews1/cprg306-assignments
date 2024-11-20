@@ -11,9 +11,10 @@
   "dependencies": {
     "encoding": "^0.1.13",
     "firebase": "^11.0.1",
-    "next": "^14.2.15",
+    "next": "^15.0.3",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
   },
   "devDependencies": {
     "eslint": "^8",

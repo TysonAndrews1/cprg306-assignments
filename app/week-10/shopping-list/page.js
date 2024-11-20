@@ -6,6 +6,7 @@ import React from "react";
 import jsonItems from "./items.json";
 import MealIdeas from "./meal-ideas";
 import { useUserAuth } from "../_utils/auth-context"; // Import your custom hook for user authentication
+import { addItem, getItems } from "../_services/shoppoing-list-service";
 
 function generateRandomString(length) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
